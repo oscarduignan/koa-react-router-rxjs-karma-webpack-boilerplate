@@ -1,11 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Route } from 'react-router';
-
-class HelloWorld extends Component {
-    render() {
-        return <p>Hello world!</p>;
-    }
-}
+import HelloWorld from './views/HelloWorld';
 
 export default (
     <Route path="/" handler={HelloWorld}/>
