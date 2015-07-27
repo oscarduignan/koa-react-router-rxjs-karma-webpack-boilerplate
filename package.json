@@ -1,0 +1,13 @@
+{
+  "name": "koa-react-router-rxjs-karma-webpack",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "babel": "^5.8.9",
+    "koa": "^0.21.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "server": "babel-node --harmony src/js/server.js"
+  }
+}
