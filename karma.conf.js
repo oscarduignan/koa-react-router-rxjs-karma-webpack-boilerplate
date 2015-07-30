@@ -2,9 +2,9 @@ var path = require('path');
 
 module.exports = function(config) {
     config.set({
-        browsers: ['PhantomJS'],
+        browsers: ['Chrome'],
 
-        frameworks: ['mocha', 'chai', 'sinon-chai'],
+        frameworks: ['jasmine'],
 
         phantomjsLauncher: {
           exitOnResourceError: true
@@ -26,22 +26,23 @@ module.exports = function(config) {
             module: {
                 loaders: [{
                     test: /\.jsx?$/,
-                    loaders: ['babel'],
+                    loaders: ['babel?stage=1'],
                     include: path.join(__dirname, 'src')
                 }]
             }
         },
 
         webpackMiddleware: {
-            noInfo: true
+            noInfo: true,
+            quiet: true
         },
 
         plugins: [
             'karma-sourcemap-loader',
+            'karma-chrome-launcher',
             'karma-phantomjs-launcher',
             'karma-webpack',
-            'karma-mocha',
-            'karma-chai-plugins'
+            'karma-jasmine'
         ]
 
     });

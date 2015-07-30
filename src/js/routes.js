@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router';
-import HelloWorld from './views/HelloWorld';
+import App from './views/App';
 
 export default (
-    <Route path="/" handler={HelloWorld}/>
+    <Route path="/" handler={App}/>
 );
