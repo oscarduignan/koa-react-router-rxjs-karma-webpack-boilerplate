@@ -1,8 +1,12 @@
-var path = require('path');
-var webpack = require('webpack');
+var path = require('path'),
+    webpack = require('webpack'),
+    CleanPlugin = require('clean-webpack-plugin');
+
+var NODE_ENV    = process.env.NODE_ENV || 'development',
+    PRODUCTION  = NODE_ENV === 'production',
+    DEVELOPMENT = NODE_ENV === 'development';
 
 module.exports = {
-    devtool: 'eval-source-map',
     entry: {
         'body': [
             path.join(__dirname, 'src', 'js', 'body.js')
@@ -16,6 +20,7 @@ module.exports = {
         filename: '[name].js'
     },
     plugins: [
+        new CleanPlugin(['dist']),
         new webpack.NoErrorsPlugin()
     ],
     resolve: {
@@ -24,11 +29,14 @@ module.exports = {
     module: {
         loaders: [{
             test: /\.jsx?$/,
-            loaders: ['react-hot', 'babel?stage=1'],
+            loaders: (DEVELOPMENT ? ['react-hot'] : []).concat('babel'),
             include: path.join(__dirname, 'src')
         }]
     },
+    devtool: (DEVELOPMENT ? 'eval-source-map' : 'inline-source-map'),
     devServer: {
+        hot: true,
+        inline: true,
         historyApiFallback: true,
         contentBase: path.join(__dirname, 'dist'),
         stats: {

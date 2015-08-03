@@ -4,6 +4,7 @@ import Rx from 'rx';
 import React from 'react';
 import Router from 'react-router';
 import routes from './routes';
+import model from './utils/model';
 
 var app = koa();
 
@@ -15,13 +16,9 @@ app.use(function *() {
     yield this.render('layout', {
         app: yield new Promise(resolve => {
             Router.run(routes, this.request.url, (Handler, request) => {
-                // TODO what happens when we have multiple handlers and nested routes
-                Handler.routes[0].handler.
-                    model(request).
-                    take(1).
-                    subscribe(state => {
-                        resolve(React.renderToString(<Handler {...state}/>));
-                    });
+                model(Handler, request).take(1).subscribe(props => {
+                    resolve(React.renderToString(<Handler {...props}/>));
+                });
             });
         })
     });

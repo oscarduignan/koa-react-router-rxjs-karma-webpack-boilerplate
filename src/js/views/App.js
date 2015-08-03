@@ -5,25 +5,19 @@ import model from '../model';
 import Greeting from '../greeter/Greeting';
 
 class App extends Component {
-    constructor(props) {
-        super(props);
-        this.changeRecipient = this.changeRecipient.bind(this);
-    }
-
-    changeRecipient(name) {
-        this.props.dispatch(greeter.changeRecipient(name));
-    }
-
     render() {
-        console.log(this.props.greeter);
         return (
             <div>
                 <Greeting {...this.props.greeter}/>
                 <hr/>
                 <p>Not you? Tell me who you are!</p>
-                <input type='text' onChange={(event) => this.changeRecipient(event.target.value)}/>
+                <input type='text' defaultValue={this.props.greeter.recipient} onChange={(event) => this.changeRecipient(event.target.value)}/>
             </div>
         );
+    }
+
+    changeRecipient = (name) => {
+        this.props.dispatch(greeter.changeRecipient(name));
     }
 }
 
