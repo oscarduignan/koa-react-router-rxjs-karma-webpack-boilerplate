@@ -6,10 +6,6 @@ module.exports = function(config) {
 
         frameworks: ['jasmine'],
 
-        phantomjsLauncher: {
-          exitOnResourceError: true
-        },
-
         files: [
             'src/js/tests.js'
         ],
@@ -40,10 +36,8 @@ module.exports = function(config) {
         plugins: [
             'karma-sourcemap-loader',
             'karma-chrome-launcher',
-            'karma-phantomjs-launcher',
             'karma-webpack',
             'karma-jasmine'
         ]
-
     });
 };
